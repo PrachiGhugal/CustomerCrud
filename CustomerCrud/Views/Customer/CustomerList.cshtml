@@ -1,0 +1,102 @@
+﻿@model List<CustomerCrud.Context.CustomerTable>
+@{
+    ViewBag.Title = "CustomerList";
+}
+<style>
+    a[disabled]{
+        display:none;
+    }
+</style>
+<table class="table table-hover">
+    <tr>
+        <th hidden="true">ID</th>
+        <th>Full Name</th>
+        <th>Nationality</th>
+        <th>Country</th>
+        <th>State</th>
+        <th>City</th>
+        <th>Address</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td hidden="true">@item.Id</td>
+            <td>@item.Fname @item.Lname</td>
+            <td>@item.Nationality</td>
+            <td>@item.Country</td>
+            <td>@item.State</td>
+            <td>@item.City</td>
+            <td>@item.Address</td>
+
+            <td>
+                @if (item.Isactive == false)
+                {
+                    <span style="color: green;">Active</span>
+                }
+                else
+                {
+                    <span style="color: red;">Deactive</span>
+                }
+            </td>
+
+            <td>
+
+                @if (item.Isactive == false)
+                {
+                    <a href="@Url.Action("Customer", new {item.Id,item.CustID,item.Fname,item.Lname,item.Age,item.Nationality,item.Country,item.State,item.City,item.Address,item.Isactive})" class="btn btn-primary">Edit</a>
+                    <a href="@Url.Action("DeactivateCustomer", new { id = item.Id })" class="btn btn-danger">Deactivate</a>
+
+                }
+                else
+                {
+                    <a href="javascript:void(0);" class="btn btn-default disabled" disabled">Edit</a>
+                    <a href="javascript:void(0);" class="btn btn-default disabled" disabled>Dectivate</a>
+                    <a href="@Url.Action("ActivateCustomer", new { id = item.Id })" class="btn btn-success">Activate</a>
+                }
+            </td>
+            <td>
+            </td>
+        </tr>
+    }
+</table>
+<a href="@Url.Action("Customer")" class="btn btn-primary">Add Customer</a>
+<!--
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".activate-customer").on("click", function (e) {
+            e.preventDefault(); // Prevent the default anchor click behavior
+
+            var customerId = $(this).data("id");
+             // Reference to the Deactivate button
+
+            // Make an AJAX POST request to DeactivateCustomer action
+            $.ajax({
+                url: "@Url.Action("DeactivateCustomer", "Customer")",
+                type: "POST",
+                data: { id: customerId },
+                success: function (data) {
+                    // Handle the success response here
+                    console.log("Customer deactivated successfully!");
+
+                    // Example: Update the UI to reflect the status change
+                    var statusCell = $(this).closest("tr").find(".status");
+                    statusCell.html('<span style="color: red;">Deactive</span>');
+
+                    // Example: Show a success message (you can use a Bootstrap alert or another method)
+                    // Replace 'success-message' with an appropriate HTML element to display the message
+                    $("#success-message").text("Customer deactivated successfully");
+
+                    // Optionally, you can hide the Deactivate button after deactivation
+                    $(this).hide();
+                },
+                error: function (error) {
+                    // Handle the error response here (if needed)
+                    console.error("Error:", error);
+                }
+            });
+        });
+    });
+</script>-->

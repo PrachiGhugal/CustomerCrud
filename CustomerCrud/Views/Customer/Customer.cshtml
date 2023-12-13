@@ -1,0 +1,157 @@
+﻿@model CustomerCrud.Context.CustomerTable
+@{
+    ViewBag.Title = "Customer";
+}
+
+<style>
+    .error{
+        color:red;
+    }
+
+    .form-group-1 {
+        display: inline-block;
+        margin-right: 0px;
+        
+    }
+
+    .form-group-2 {
+        display: inline-block;
+        margin-right: 0px;
+    }
+
+    .small-dropdown {
+        width: 150px;
+    }
+
+    .form-control{
+        width:300px;
+        height:40px;
+    }
+</style>
+<h2>Enter data to Add Customer</h2>
+<br/>
+@using (Html.BeginForm("AddCustomer", "Customer", FormMethod.Post))
+{
+                <div class="container">
+                    <div class="form-group">
+                        <label hidden="true">Id</label>
+                        @Html.ValidationMessageFor(x => x.Id, "", new { @class = "error" })
+                        @Html.HiddenFor(x => x.Id, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label hidden="true">Customer Id</label>
+                        @Html.ValidationMessageFor(x => x.CustID, "", new { @class = "error" })
+                        @Html.HiddenFor(x => x.CustID, new { @class = "form-control" })
+                    </div>
+                    <div>
+                        <div class="form-group-1">
+                            <label>First Name</label>
+                            @Html.ValidationMessageFor(x => x.Fname, "", new { @class = "error" })
+                            @Html.TextBoxFor(x => x.Fname, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group-1">
+                            <label>Last Name</label>
+                            @Html.ValidationMessageFor(x => x.Lname, "", new { @class = "error" })
+                            @Html.TextBoxFor(x => x.Lname, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group-1">
+                            <label>Age</label>
+                            @Html.ValidationMessageFor(x => x.Age, "", new { @class = "error" })
+                            @Html.TextBoxFor(x => x.Age, new { @class = "form-control" })
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Nationality</label>
+                        @{
+                            var listitem = new List<SelectListItem>
+                                                                            {
+                                new SelectListItem { Text = "Indian", Value = "Indian" },
+                                new SelectListItem { Text = "American", Value = "American" },
+                                new SelectListItem { Text = "Chinese", Value = "Chinese" }
+                            };
+                        }
+                        @Html.ValidationMessageFor(x => x.Nationality, "", new { @class = "error" })
+                        @Html.DropDownListFor(x => x.Nationality, listitem, "Select Nationality", new { @class = "form-control" })
+                    </div>
+                    <div class="form-group-1">
+                        <label>Country</label>
+                        @{
+                            var listitems = new List<SelectListItem>
+                                                                            {
+                                    new SelectListItem{ Text = "India", Value = "India" },
+                                    new SelectListItem{ Text = "USA", Value = "USA" },
+                                    new SelectListItem{ Text = "China", Value = "China" }
+                            };
+                        }
+                        @Html.ValidationMessageFor(x => x.Country, "", new { @class = "error" })
+                        @Html.DropDownListFor(x => x.Country, listitems, "Select Country", new { @class = "form-control small-dropdown" })
+                    </div>
+                    <div class="form-group-1">
+                        <label>State</label>
+                        @{
+                            var ltitem = new List<SelectListItem>
+                                                                            {
+                                    new SelectListItem{ Text = "Maharashtra", Value = "Maharashtra" },
+                                    new SelectListItem() { Text = "Telangana", Value = "Telangana" },
+                                    new SelectListItem() { Text = "MP", Value = "MP" },
+                                    new SelectListItem() { Text = "California", Value = "California" },
+                                    new SelectListItem() { Text = "New York", Value = "New York" },
+                                    new SelectListItem() { Text = "Texas", Value = "Texas" },
+                                    new SelectListItem() { Text = "Beijing", Value = "Beijing" },
+                                    new SelectListItem() { Text = "Shanghai", Value = "Shanghai" },
+                                    new SelectListItem() { Text = "Sichuan", Value = "Sichuan" }
+                            };
+                        }
+                        @Html.ValidationMessageFor(x => x.State, "", new { @class = "error" })
+                        @Html.DropDownListFor(x => x.State, ltitem, "Select State", new { @class = "form-control small-dropdown" })
+                    </div>
+                    <div class="form-group-1">
+                        <label>City</label>
+                        @{
+                            var lstitem = new List<SelectListItem>                                               {
+                                    new SelectListItem() { Text = "Nagpur", Value = "Nagpur" },
+                                    new SelectListItem() { Text = "Hyderbad", Value = "Hyderbad" },
+                                    new SelectListItem() { Text = "Bhopal", Value = "Bhopal" },
+                                    new SelectListItem() { Text = "San Francisco", Value = "San Francisco" },
+                                    new SelectListItem() { Text = "Rochester", Value = "Rochester" },
+                                    new SelectListItem() { Text = "Austin", Value = "Austin" },
+                                    new SelectListItem() { Text = "Haidian", Value = "Haidian" },
+                                    new SelectListItem() { Text = "Daxing", Value = "Daxing" },
+                                    new SelectListItem() { Text = "Changping", Value = "Changping" }
+                                };
+                        }
+                        @Html.ValidationMessageFor(x => x.City, "", new { @class = "error" })
+                        @Html.DropDownListFor(x => x.City, lstitem, "Select City", new { @class = "form-control small-dropdown" })
+
+                    </div>
+
+
+                    <div>
+                        <div class="form-group-1">
+                            <label>Line 1 </label>
+                            @Html.ValidationMessageFor(x => x.Address, "", new { @class = "error" })
+                            @Html.TextBoxFor(x => x.Address, new { @class = "form-control" })
+
+                        </div>
+                        <div class="form-group-1">
+                            <label>Line 2 </label>
+                            @Html.TextBoxFor(x => x.Address, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group-1">
+                            <label>Line 3 </label>
+                            @Html.TextBoxFor(x => x.Address, new { @class = "form-control" })
+                        </div>
+                        
+                    </div>
+                </div>
+
+
+                <br/>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Save</button>
+                        <button type="reset" class="btn btn-danger">Reset</button>
+                    </div>
+}
+
+
